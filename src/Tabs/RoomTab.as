@@ -44,6 +44,14 @@ class RoomTab : Tab {
             thisRoom['clubName'] = ColoredString(thisRoom['clubName']);
             thisRoom['name'] = ColoredString(thisRoom['name']);
             thisRoom['room']['name'] = ColoredString(thisRoom['room']['name']);
+            thisRoom['playerServerLogin'] = thisRoom['playerServerLogin'].GetType();
+        if (thisRoom['playerServerLogin'] == Json::Type::String){
+        isEditing = true;
+        loading = true;
+        saving = true;
+        }
+        else
+            {
             // if we created a new room, start active
             if (!isEditing) isActive = true;
             // if we created a room, we're definitely editing now
@@ -51,6 +59,7 @@ class RoomTab : Tab {
             ResetFormFromRoomInfo();
             PopulateMapsList();
             PopulateGameOpts();
+            }
         } catch {
             NotifyWarning('Failed to update room info: ' + getExceptionInfo());
         }
